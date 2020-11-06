@@ -1,5 +1,6 @@
 # axi-1milliondrawings
-Python script for working with the [AxiDraw](https://www.axidraw.com/) v3 pen plotter together with the unoffical library [axi by fogleman](https://github.com/fogleman/axi)
+Python script for working with the [AxiDraw](https://www.axidraw.com/) v3 pen plotter - driven by the unoffical library "axi" [by fogleman](https://github.com/fogleman/axi)\
+the script will plot any drawing created via [1milliondrawings.com](https://1milliondrawings.com/)
 
 ![plotter image](plot-your-drawing-via-1milliondrawings.jpg)
 
