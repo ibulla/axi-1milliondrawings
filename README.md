@@ -1,8 +1,6 @@
 # axi-1milliondrawings
 Python script for working with the [AxiDraw](https://www.axidraw.com/) v3 pen plotter - driven by the unoffical library "axi" [by fogleman](https://github.com/fogleman/axi)\
-the script will plot any drawing created via [1milliondrawings.com](https://1milliondrawings.com/)
-
-![plotter image](plot-your-drawing-via-1milliondrawings.jpg)
+[the script](plotter.py) will plot any drawing created via [1milliondrawings.com](https://1milliondrawings.com/)
 
 ## basics
 - once you installed the library and connected your plotter you could perform cool stuff via the console
@@ -15,6 +13,8 @@ the script will plot any drawing created via [1milliondrawings.com](https://1mil
 
 ## functions
 - 
+
+![plotter image](plot-your-drawing-via-1milliondrawings.jpg)
 
 ## emergency shutdown
 - kill the script or plug the energy
