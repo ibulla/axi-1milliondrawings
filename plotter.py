@@ -1,6 +1,5 @@
 from axi import Device, Drawing
 import time
-import random
 import json
 import urllib2
 import requests
@@ -506,8 +505,6 @@ def LineMakerSmall(wort,h,line):
     return ausgabeWort
 
 def bildprinter(image):
-    #1666 saltNpepper,
-    #image = 1824 #random.randint(1590,1790) #1739 1630(?lang) 1698(herz)1790(kaktus)(1553 btc)
     url = "https://1milliondrawings.com/axipath?nr="+str(image)
     result = requests.get(url).json()
     resultat = []
@@ -544,15 +541,21 @@ def bildprinter(image):
         printer(resultat)
         printer(LineMakerSmall(str(resuavgc)+"."+str(resuzeit)+"."+str(Datum),4,0))
 
-def Anfang():
-    bildnummer = raw_input("BILD NUMMER (n): ")
-    if(bildnummer == "n"):
+def Plott():
+    drawing = raw_input("PLOT DRAWING NR (type (n) to STOP ): ")
+    if(drawing == "n"):
         exit()
     else:
         try:
-            bildprinter(bildnummer)
+            bildprinter(drawing)
         except IOError:
             print 'oops!'
 
-for i in range(300):
-    Anfang()
+    # TEST ONE OF THESE NUMBERS #
+    # 1666 (saltNpepper)
+    # 1553 (BTC)
+    # 1698 (heart)
+    # 1790 (cactus)
+        
+while(True):
+    Plott()
