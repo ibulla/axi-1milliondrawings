@@ -7,11 +7,15 @@ Python script for working with the [AxiDraw](https://www.axidraw.com/) v3 pen pl
 - go to [1milliondrawings.com](https://1milliondrawings.com/), create a login, draw your own or just play around with one of the existing drawings
 - if you don't want to plot your own drawings you don't even need a login...
 
+## files
+- [Script to plot your drawing](plotter.py)
+- [Template to create the paper holder](axi_platten1.ai)
+
 ## prepration
 - place an A4 size medium like described
 - start the script
 
-## functions
+## functions (plotter.py)
 - 
 
 ![plotter image](plot-your-drawing-via-1milliondrawings.jpg)
