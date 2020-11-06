@@ -5,6 +5,15 @@ import urllib2
 import requests
 import datetime
 
+################################################
+###        by 1milliondrawings.com           ###
+###                                          ###
+### 1. go to 1milliondrawings.com	     ###
+### 2. save your drawing                     ###
+### 3. plot your DRAWING-ID                  ###
+###                                          ###
+################################################
+
 def printer(PATH):
     drawing = Drawing(PATH)
     d = Device()
