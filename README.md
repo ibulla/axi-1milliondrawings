@@ -14,7 +14,7 @@ driven by the unoffical library "axi" [by fogleman](https://github.com/fogleman/
 
 ## prepration
 - [x] place the pen and paper like described
-- [] start the script
+- [ ] start the script
 
 ## functions (plotter.py)
 - 
