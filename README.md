@@ -17,4 +17,4 @@ Python script for working with the [AxiDraw](https://www.axidraw.com/) v3 pen pl
 ![plotter image](plot-your-drawing-via-1milliondrawings.jpg)
 
 ## emergency shutdown
-- kill the script or plug the energy
+- kill the script or pull the plug
