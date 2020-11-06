@@ -552,8 +552,7 @@ def Plott():
             print 'oops!'
 
     # TEST ONE OF THESE NUMBERS #
-    # 1666 (saltNpepper)
-    # 1553 (BTC)
+    # 2510 (welcome to 2020)
     # 1698 (heart)
     # 1790 (cactus)
         
