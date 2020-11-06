@@ -13,8 +13,8 @@ driven by the unoffical library "axi" [by fogleman](https://github.com/fogleman/
 - [Template to create the paper holder](axi_platten1.ai)
 
 ## prepration
-- place an A4 size medium like described
-- start the script
+- [x] place the pen and paper like described
+- [] start the script
 
 ## functions (plotter.py)
 - 
