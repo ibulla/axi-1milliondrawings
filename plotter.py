@@ -1,14 +1,14 @@
 from axi import Device, Drawing
-import time
+#import time
 import json
-import urllib2
+#import urllib2
 import requests
-import datetime
+from datetime import datetime
 
 ################################################
 ###        by 1milliondrawings.com           ###
 ###                                          ###
-### 1. go to 1milliondrawings.com	     ###
+### 1. go to 1milliondrawings.com	         ###
 ### 2. save your drawing                     ###
 ### 3. plot your DRAWING-ID                  ###
 ###                                          ###
@@ -21,7 +21,7 @@ def printer(PATH):
     d.run_drawing(drawing)
     d.disable_motors()
 
-def Buchstabe(letter,millimeter,plusX,plusY):
+def bigChar(letter,millimeter,plusX,plusY):
     faktor = float((millimeter / 20.0) / 640.0) #1=20mm  Xmm/20mm=640px
     if plusX:
         XX = ((plusX * 500) * faktor)
@@ -41,7 +41,7 @@ def Buchstabe(letter,millimeter,plusX,plusY):
             zahlA += 1
     return neuA
 
-def BuchstabeSmall(letter,millimeter,plusX,plusY):
+def smallChar(letter,millimeter,plusX,plusY):
     faktor = float((millimeter / 20.0) / 640.0) #1=20mm  Xmm/20mm=640px
     if plusX:
         XX = ((plusX * 640) * faktor)
@@ -61,7 +61,7 @@ def BuchstabeSmall(letter,millimeter,plusX,plusY):
             zahlA += 1
     return neuA
 
-def Rechteck(startX,startY,lang,hoch):
+def print_rectangle(startX,startY,lang,hoch):
     langx = float(lang / 20.0) #1=20mm
     langy = float(hoch / 20.0) #1=20mm
     startx = float(startX / 20.0) #1=20mm
@@ -74,7 +74,7 @@ def Rechteck(startX,startY,lang,hoch):
     neuA.append((startx,starty))
     return neuA
 
-def LogoPos(letter,millimeter,plusX,plusY):
+def print_logoPos(letter,millimeter,plusX,plusY):
     faktor = float((millimeter / 20.0) / 640.0) #1=20mm  Xmm/20mm=640px
     XX = float(plusX / 20.0)
     YY = float(plusY / 20.0)
@@ -88,7 +88,7 @@ def LogoPos(letter,millimeter,plusX,plusY):
             zahlA += 1
     return neuA
 
-def Logo(h,x,y):
+def print_logo(h,x,y):
     logo = []
     logo.append([(19.3,61.9),(25.2,58.2),(31.6,50.4),(37.8,42.1),(41.7,36.6),
     (41.7,41.1),(40.5,56.1),(38.8,75.1),(37.3,97.2),(37,112.1),(38.3,118.7)])
@@ -180,12 +180,12 @@ def Logo(h,x,y):
       (113.6,44.2),(113.6,41.2),(111.4,38.7)])
     ausgabeAxi = []
     for sign in logo:
-        axiready = LogoPos([sign],h,x,y)
+        axiready = print_logoPos([sign],h,x,y)
         ausgabeAxi.append(axiready)
     return ausgabeAxi
 
 
-def letterToWord(letter,h,x,y):
+def bigChars(letter,h,x,y):
     buchstabe = []
     if letter =="A" or letter == "a":
         buchstabe.append([(408.8,71.9),(208.6,74.9),(62.4,586.2),(196.1,577.5),(257.1,359.2),
@@ -347,12 +347,12 @@ def letterToWord(letter,h,x,y):
         (346.7,382.3),(349.1,253.6)])
     ausgabeAxi = []
     for sign in buchstabe:
-        axiready = Buchstabe([sign],h,x,y)
+        axiready = bigChar([sign],h,x,y)
         ausgabeAxi.append(axiready)
     return ausgabeAxi
 
 
-def letterToWordStrich(letter,h,x,y):
+def smallChars(letter,h,x,y):
     buchstabe = []
     if letter =="A" or letter == "a":
         buchstabe.append([(96.5,566.9),(299,91.9),(525,566.9)])
@@ -486,84 +486,75 @@ def letterToWordStrich(letter,h,x,y):
         (346.7,382.3),(349.1,253.6)])
     ausgabeAxi = []
     for sign in buchstabe:
-        axiready = BuchstabeSmall([sign],h,x,y)
+        axiready = smallChar([sign],h,x,y)
         ausgabeAxi.append(axiready)
     return ausgabeAxi
 
+#print_bigChars: char,font-height(mm),lines relative to font-height, max chars to plot
+def print_bigChars(word,h,line,maxChar):
+    plottableWord = []
+    XX = 0
+    YY = line
+    for w in word:
+        if(XX <= maxChar):
+            for ww in bigChars(w,h,XX,YY):
+                plottableWord.append(ww)
+        XX += 1
+    return plottableWord
 
-def LineMaker(wort,h,line):
+#print_smallChars: char,font-height(mm),lines relative to font-height
+def print_smallChars(wort,h,line):
     ausgabeWort = []
     XX = 0
     YY = line
     for w in wort:
-        print w
-        for ww in letterToWord(w,h,XX,YY):
+        for ww in smallChars(w,h,XX,YY):
             ausgabeWort.append(ww)
         XX += 1
     return ausgabeWort
 
-def LineMakerSmall(wort,h,line):
-    ausgabeWort = []
-    XX = 0
-    YY = line
-    for w in wort:
-        print w
-        for ww in letterToWordStrich(w,h,XX,YY):
-            ausgabeWort.append(ww)
-        XX += 1
-    return ausgabeWort
-
-def bildprinter(image):
+def print_Plotter(image):
     url = "https://1milliondrawings.com/axipath?nr="+str(image)
-    result = requests.get(url).json()
+    result = requests.get(url).json()   #
     resultat = []
     for pfad in result["CORD"]:
         resu = [(piece['x'], piece['y']) for piece in pfad]
         resultat.append(resu)
-    resuanz   = result["KLICK"]
-    resuzeit  = result["ZEIT"]
-    resudat1  = result["DATUM1"]
-    resuauth  = result["AUTHOR"]
-    if resuauth == "Anonymous Artist":
-        resuauth = "Anonymous"
-    else:
-        resuauth = resuauth
-    resutitl  = result["TITLE"]
-    resuavgc  = result["AVGC"]
-    print resultat
-    f = '%Y-%m-%d %H:%M:%S'
-    today  = datetime.datetime.strptime(resudat1,f) #today()
-    Datum  = ("{:%d%m%Y%H%M}".format(today))
-    print (str(resutitl) + " by " + str(resuauth))
-    print (str(Datum) +":"+  str(image) +":"+ str(resuanz))
-    plot = raw_input("PLOT OR NOT(y/n)")
+    resuanz   = result["KLICK"]     #how many points the drawing consists of
+    resuzeit  = result["ZEIT"]      #how long the drawing took in seconds
+    resudat1  = result["DATUM1"]    #the date the drawing was drawn
+    resuauth  = result["AUTHOR"]    #the author if provided else "Anonymous Artist"
+    resutitl  = result["TITLE"]     #the provided title
+    resuavgc  = result["AVGC"]      #the avarage color as decimal number
+    resuname  = result["NAME"]      #the drawing name (number)
+    today     = datetime.now()
+    print_date  = ("{:%d%m%Y%H%M}".format(today))
+    # print resultat #uncomment to see the whole paths
+    print ("Drawing ID: " +str(resuname) +" consists of "+ str(resuanz) + " points")
+    print ("PLOT <" + str(resutitl) + "> by " + str(resuauth))
+    plot = raw_input("PLOT OR STOP (y/n)")
     if(plot == "y"):
         printer([
-            Rechteck(-10,-33,7,2),
-            Rechteck(-10,-15,7,2),
-            Rechteck(-10,-4,140,140)
+            print_rectangle(-10,-41,140,24),
+            print_rectangle(-10,-4,140,140)
             ])
-        printer(Logo(90,15,-70))
-        printer(LineMakerSmall(str(resutitl) + " by " + str(resuauth),5,-4))
-        printer(LineMakerSmall("consists of "+str(resuanz)+" points",4,-3))
-        printer(LineMaker("#"+str(image),13,-3))
-        printer(resultat)
-        printer(LineMakerSmall(str(resuavgc)+"."+str(resuzeit)+"."+str(Datum),4,0))
+        printer(print_logo(90,15,-70))
+        printer(print_bigChars(str(resutitl),11,-3,13)) #max 13 char in that size
+        printer(print_smallChars("by "+str(resuauth),4,-3.35))
+        printer(resultat) #here we plot the drawing itself from left to right
+        printer(print_smallChars("#" + str(resuname),4,30))
+        printer(print_smallChars("                   " + str(print_date),4,30))
 
 def Plott():
-    drawing = raw_input("PLOT DRAWING NR (type (n) to STOP ): ")
+    drawing = raw_input("PLOT DRAWING NR (ID/n to STOP ): ")
     if(drawing == "n"):
         exit()
     else:
         try:
-            bildprinter(drawing)
+            print_Plotter(drawing)
         except IOError:
             print 'oops!'
 
-    # TEST ONE OF THESE NUMBERS #
-    # 2510 (welcome to 2020)
-    # 1698 (heart)
-    # 1790 (cactus)
-        
+    # TEST NUMBER 2913
 while(True):
     Plott()
