@@ -6,18 +6,27 @@ driven by the unoffical library "axi" [by fogleman](https://github.com/fogleman/
 ## basics
 - once you installed the library and connected your plotter you could perform cool stuff via the console
 - go to [1milliondrawings.com](https://1milliondrawings.com/), create a login, draw your own or just play around with one of the existing drawings
-- if you don't want to plot your own drawings you don't even need a login...
 
 ## files
 - [Script to plot your drawing](plotter.py)
 - [Template to create the paper holder](axi_platten1.ai)
 
 ## prepration
-- [x] place the pen and paper like described
-- [ ] start the script
+- [x] place the pen and paper like described in the picture
+- [ ] start the script, try out nr 2913 ;)
 
-## functions (plotter.py)
-- 
+## script step by step (plotter.py)
+- first you get asked for the drawing-ID, if you leave if free a random drawing gets pulled
+- now you see some informations about the drawing, you see how many lines will get drawn, the title ect.
+- if you type in "y" it will start as fallow, with "n" you can stop it
+- now the machine comes to live:
+ - first there are two rectangles drawn
+ - after that the logo gets drawn on top
+ - now the data from 1milliondrawings.com come to play
+ - titel and author get ploted
+ - the drawing itself gets drawn, lines are ordered by starting point, left to right
+ - on the bottom the drawing-ID and date of print are ploted
+ - end.
 
 ![plotter image](plot-your-drawing-via-1milliondrawings.jpg)
 
