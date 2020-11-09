@@ -14,21 +14,22 @@ driven by the unoffical library "axi" [by fogleman](https://github.com/fogleman/
 ## prepration
 - [x] place the pen and paper like described in the picture
 - [ ] start the script, try out nr 2913 ;)
+![plotter image](setup.jpg)
 
 ## script step by step (plotter.py)
 - first you get asked for the drawing-ID, if you leave if free a random drawing gets pulled
 - now you see some informations about the drawing, you see how many lines will get drawn, the title ect.
 - if you type in "y" it will start as fallow, with "n" you can stop it
 - now the machine comes to live:
- - first there are two rectangles drawn
- - after that the logo gets drawn on top
+ - 1.) 2.)two rectangles are drawn
+ - 3.) the logo gets drawn on the top
  - now the data from 1milliondrawings.com come to play
- - titel and author get ploted
- - the drawing itself gets drawn, lines are ordered by starting point, left to right
- - on the bottom the drawing-ID and date of print are ploted
+ - 4.) 5.) titel and author get ploted
+ - 6.) the drawing itself gets drawn, lines are ordered by starting point, left to right
+ - 7.) 8.) on the bottom the drawing-ID and date of print are ploted
  - end.
 
-![plotter image](plot-your-drawing-via-1milliondrawings.jpg)
+![plotter image](setup.jpg)
 
 ## emergency shutdown
 - kill the script or pull the plug
