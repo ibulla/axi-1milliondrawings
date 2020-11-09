@@ -9,14 +9,14 @@ driven by the unoffical library "axi" [by fogleman](https://github.com/fogleman/
 
 ## files
 - [Script to plot your drawing](plotter.py)
-- [Template to create the paper holder](axi_platten1.ai)
+- [Template to create the paper holder](axi_platten1.ai) (illustrator file)
 
 ## prepration
 - [x] place the pen and paper like described in the picture
 - [ ] start the script, try out nr 2913 ;)
 ![plotter image](howto.jpg)
 
-## script step by step (plotter.py)
+## step by step (plotter.py)
 - first you get asked for the drawing-ID, if you leave if free a random drawing gets pulled
 - now you see some informations about the drawing, you see how many lines will get drawn, the title ect.
 - if you type in "y" it will start as fallow, with "n" you can stop it
