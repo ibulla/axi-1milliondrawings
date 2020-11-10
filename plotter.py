@@ -1,14 +1,12 @@
 from axi import Device, Drawing
-#import time
 import json
-#import urllib2
 import requests
 from datetime import datetime
 
 ################################################
 ###        by 1milliondrawings.com           ###
 ###                                          ###
-### 1. go to 1milliondrawings.com	         ###
+### 1. go to 1milliondrawings.com	     ###
 ### 2. save your drawing                     ###
 ### 3. plot your DRAWING-ID                  ###
 ###                                          ###
@@ -515,21 +513,22 @@ def print_smallChars(wort,h,line):
 
 def print_Plotter(image):
     url = "https://1milliondrawings.com/axipath?nr="+str(image)
-    result = requests.get(url).json()   #
+    result = requests.get(url).json()	#whole json request
     resultat = []
-    for pfad in result["CORD"]:
+    for pfad in result["CORD"]:		#all the coordinates to plot the lines
         resu = [(piece['x'], piece['y']) for piece in pfad]
         resultat.append(resu)
-    resuanz   = result["KLICK"]     #how many points the drawing consists of
-    resuzeit  = result["ZEIT"]      #how long the drawing took in seconds
-    resudat1  = result["DATUM1"]    #the date the drawing was drawn
-    resuauth  = result["AUTHOR"]    #the author if provided else "Anonymous Artist"
-    resutitl  = result["TITLE"]     #the provided title
-    resuavgc  = result["AVGC"]      #the avarage color as decimal number
-    resuname  = result["NAME"]      #the drawing name (number)
+    resuanz   = result["KLICK"]     	#how many points the drawing consists of
+    resuzeit  = result["ZEIT"]      	#how long the drawing took in seconds
+    resudat1  = result["DATUM1"]    	#the date the drawing was drawn
+    resuauth  = result["AUTHOR"]    	#the author if provided else "Anonymous Artist"
+    resutitl  = result["TITLE"]     	#the provided title
+    resuavgc  = result["AVGC"]      	#the avarage color as decimal number
+    resuname  = result["NAME"]      	#the drawing name (number)
     today     = datetime.now()
     print_date  = ("{:%d%m%Y%H%M}".format(today))
-    # print resultat #uncomment to see the whole paths
+    # uncomment to see the all coordinates in your terminal window
+    # print resultat
     print ("Drawing ID: " +str(resuname) +" consists of "+ str(resuanz) + " points")
     print ("PLOT <" + str(resutitl) + "> by " + str(resuauth))
     plot = raw_input("PLOT OR STOP (y/n)")
