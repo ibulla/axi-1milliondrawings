@@ -512,7 +512,7 @@ def print_smallChars(wort,h,line):
     return ausgabeWort
 
 def print_Plotter(image):
-    url = "https://1milliondrawings.com/axipath?nr="+str(image)
+    url = "https://www.wedodraw.com/plotter_axi_by_id.php?nr="+str(image)
     result = requests.get(url).json()	#whole json request
     resultat = []
     for pfad in result["CORD"]:		#all the coordinates to plot the lines
