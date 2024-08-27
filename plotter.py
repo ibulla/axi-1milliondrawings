@@ -4,9 +4,9 @@ import requests
 from datetime import datetime
 
 ################################################
-###        by 1milliondrawings.com           ###
+###        by Marco Spitzbarth               ###
 ###                                          ###
-### 1. go to 1milliondrawings.com	     ###
+### 1. go to WeDoDraw.Com       	         ###
 ### 2. save your drawing                     ###
 ### 3. plot your DRAWING-ID                  ###
 ###                                          ###
@@ -512,48 +512,48 @@ def print_smallChars(wort,h,line):
     return ausgabeWort
 
 def print_Plotter(image):
-    url = "https://www.wedodraw.com/plotter_axi_by_id.php?nr="+str(image)
-    result = requests.get(url).json()	#whole json request
+    url = f"https://www.wedodraw.com/plotter_axi_by_id.php?nr={image}"
+    result = requests.get(url).json()  # Get the JSON response
     resultat = []
-    for pfad in result["CORD"]:		#all the coordinates to plot the lines
+    for pfad in result["CORD"]:  # all the coordinates to plot the lines
         resu = [(piece['x'], piece['y']) for piece in pfad]
         resultat.append(resu)
-    resuanz   = result["KLICK"]     	#how many points the drawing consists of
-    resuzeit  = result["ZEIT"]      	#how long the drawing took in seconds
-    resudat1  = result["DATUM1"]    	#the date the drawing was drawn
-    resuauth  = result["AUTHOR"]    	#the author if provided else "Anonymous Artist"
-    resutitl  = result["TITLE"]     	#the provided title
-    resuavgc  = result["AVGC"]      	#the avarage color as decimal number
-    resuname  = result["NAME"]      	#the drawing name (number)
-    today     = datetime.now()
-    print_date  = ("{:%d%m%Y%H%M}".format(today))
-    # uncomment to see the all coordinates in your terminal window
-    # print resultat
-    print ("Drawing ID: " +str(resuname) +" consists of "+ str(resuanz) + " points")
-    print ("PLOT <" + str(resutitl) + "> by " + str(resuauth))
-    plot = raw_input("PLOT OR STOP (y/n)")
-    if(plot == "y"):
+    resuanz = result["KLICK"]  # how many points the drawing consists of
+    resuzeit = result["ZEIT"]  # how long the drawing took in seconds
+    resudat1 = result["DATUM1"]  # the date the drawing was drawn
+    resuauth = result["AUTHOR"]  # the author if provided, else "Anonymous Artist"
+    resutitl = result["TITLE"]  # the provided title
+    resuavgc = result["AVGC"]  # the average color as decimal number
+    resuname = result["NAME"]  # the drawing name (number)
+    today = datetime.now()
+    print_date = today.strftime("%d%m%Y%H%M")
+    # Uncomment to see all coordinates in your terminal window
+    # print(resultat)
+    print(f"Drawing ID: {resuname} consists of {resuanz} points")
+    print(f"PLOT <{resutitl}> by {resuauth}")
+    plot = input("PLOT OR STOP (y/n): ")
+    if plot.lower() == "y":
         printer([
-            print_rectangle(-10,-41,140,24),
-            print_rectangle(-10,-4,140,140)
-            ])
-        printer(print_logo(90,15,-70))
-        printer(print_bigChars(str(resutitl),11,-3,13)) #max 13 char in that size
-        printer(print_smallChars("by "+str(resuauth),4,-3.35))
-        printer(resultat) #here we plot the drawing itself from left to right
-        printer(print_smallChars("#" + str(resuname),4,30))
-        printer(print_smallChars("                   " + str(print_date),4,30))
+            print_rectangle(-10, -41, 140, 24),
+            print_rectangle(-10, -4, 140, 140)
+        ])
+        printer(print_logo(90, 15, -70))
+        printer(print_bigChars(str(resutitl), 11, -3, 13))  # max 13 char in that size
+        printer(print_smallChars(f"by {resuauth}", 4, -3.35))
+        printer(resultat)  # here we plot the drawing itself from left to right
+        printer(print_smallChars(f"#{resuname}", 4, 30))
+        printer(print_smallChars(f"{print_date}", 4, 30))
 
 def Plott():
-    drawing = raw_input("PLOT DRAWING NR (ID/n to STOP ): ")
-    if(drawing == "n"):
+    drawing = input("PLOT DRAWING NR (ID/n to STOP): ")
+    if drawing.lower() == "n":
         exit()
     else:
         try:
             print_Plotter(drawing)
         except IOError:
-            print 'oops!'
+            print('Oops! An error occurred.')
 
-    # TEST NUMBER 2913
-while(True):
+# Loop to continuously prompt the user for a drawing number
+while True:
     Plott()
